@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Drawing;
 
 namespace Victoryna
 {
     enum DATA_SET
     {
-        text1,
-        text2,
         login_error_text,
         incorrect_login,
         Confirm_password,
@@ -32,8 +31,6 @@ namespace Victoryna
     {
 
         public static string[] strings = new string[(int)DATA_SET.max]{
-            "",
-            "",
             "Такой логин уже существует",
             "Логин должен содержать только буквы и цифры, без пробелов и более 6 символов",
             "Подтвердите пароль.",
@@ -49,24 +46,6 @@ namespace Victoryna
             "Неверно",
             "zomg"
         };
-
-        /*
-        static void load_external_array(string path) {
-            try
-            {
-                StreamReader sr = new StreamReader(path);
-                int i = 0;
-                while (!sr.EndOfStream)
-                {
-                    strings[i++] = sr.ReadLine();
-                }
-            }
-            catch
-            {
-                Console.WriteLine("lol error %)");
-            }
-        }
-        */
 
         public class question {
             public string queststring;
@@ -86,11 +65,13 @@ namespace Victoryna
                         {
                             User_data.all_points++;
                             ((Vict)VictF).label4.Text = "Верно";    //Чисто для дебаггинга
+                            ((Vict)VictF).label4.ForeColor = Color.Green;
                             return true;
                         }
                         else
                         {
                             ((Vict)VictF).label4.Text = "Неверно";
+                            ((Vict)VictF).label4.ForeColor = Color.Red;
                             return false;
                         }
                     case (int)Test.History:
@@ -98,11 +79,12 @@ namespace Victoryna
                         {
                             User_data.all_points++;
                             ((Vict)VictF).label4.Text = "Верно";    //Чисто для дебаггинга
-                            return true;
+                            ((Vict)VictF).label4.ForeColor = Color.Green; return true;
                         }
                         else
                         {
                             ((Vict)VictF).label4.Text = "Неверно";
+                            ((Vict)VictF).label4.ForeColor = Color.Red;
                             return false;
                         }
                     case (int)Test.Biology:
@@ -110,11 +92,13 @@ namespace Victoryna
                         {
                             User_data.all_points++;
                             ((Vict)VictF).label4.Text = "Верно";    //Чисто для дебаггинга
+                            ((Vict)VictF).label4.ForeColor = Color.Green;
                             return true;
                         }
                         else
                         {
                             ((Vict)VictF).label4.Text = "Неверно";
+                            ((Vict)VictF).label4.ForeColor = Color.Red;
                             return false;
                         }
                     default:
@@ -202,17 +186,6 @@ namespace Victoryna
             new question{queststring = "В стране самая большая продолжительность жизни и самая низкая детская смертность в Европе. Важнейшими природными богатствами этой страны являются лес и железная руда. В столице этого государства вручают Нобелевскую премию",answers = new string[4] {"Норвегия", "Швеция", "Швейцария", "Финляндия"}, right_answer = 2},
             new question{queststring = "В этой стране насчитывается около 7 млн иммигрантов. Они призваны восполнить «брешь» в недостатке рабочих рук, необходимых на трудоемких и малооплачиваемых производствах. В основном это турки (курды), боснийцы, сербы, хорваты, греки, евреи и представители других южноевропейских народов. О какой стране идет речь?",answers = new string[4] {"ФРГ", "Швейцария", "Австрия", "Великобритания"}, right_answer = 1}
         };
-
-        public static void Geography_questionss(int c)
-        {
-
-        }
-
-        public static void Biology_questionss(int c)
-        {
-
-        }
-
     }
 
 

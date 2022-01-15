@@ -18,7 +18,7 @@ namespace Victoryna
     {
         public static string error;     //переменная для вывода ошибок
 
-        //Функция для перемещения данных переменных в файл (запихнуть в файл)
+        //Функция для перемещения данных переменных файл (запихнуть в файл)
         public static void Serializible_func()
         {
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<User>));
@@ -88,27 +88,5 @@ namespace Victoryna
             ((Vict)VictF).checkBox3.Visible = true;
             ((Vict)VictF).checkBox4.Visible = true;
         }
-
-        //public static bool Did_you_answer_correctly_one_question(CheckBox checkBox_right, CheckBox checkBox_choose_user)  //Вроде старый способ проверки одно ответа
-        //{
-        //    System.Windows.Forms.Form VictF = System.Windows.Forms.Application.OpenForms["Vict"];
-        //    if (checkBox_right == checkBox_choose_user)
-        //    {
-        //        User_data.question++;
-        //        ((Vict)VictF).label4.Text = "Верно";       
-        //        ((Vict)VictF).label4.ForeColor = Color.Green;
-        //        User_data.points++;
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //        ((Vict)VictF).label4.Text = "Неверно";
-        //        ((Vict)VictF).label4.ForeColor = Color.Red;
-        //        User_data.question++;
-        //        return false;
-        //    }
-        //}       //Верно ли ответил пользователь? (вопрос с одним вариантом ответа
-
-
     }
 }

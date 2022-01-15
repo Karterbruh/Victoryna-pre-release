@@ -35,44 +35,6 @@ namespace Victoryna
             Vict_func.Next_questions();
         }
 
-        private void тёмнаяToolStripMenuItem_Click(object sender, EventArgs e)      //Темная тема
-        {   
-            Forms.vict.BackColor = Color.Black;
-            Forms.vict.comboBox1.BackColor = Color.DarkGray;
-            Forms.vict.button1.BackColor = Color.DarkGray;
-            Forms.vict.button2.BackColor = Color.DarkGray;
-            Forms.vict.button3.BackColor = Color.DarkGray;
-            Forms.vict.checkBox1.ForeColor = Color.WhiteSmoke;
-            Forms.vict.checkBox2.ForeColor = Color.WhiteSmoke;
-            Forms.vict.checkBox3.ForeColor = Color.WhiteSmoke;
-            Forms.vict.checkBox4.ForeColor = Color.WhiteSmoke;
-            Forms.vict.label1.ForeColor = Color.WhiteSmoke;
-            Forms.vict.label2.ForeColor = Color.WhiteSmoke;
-            Forms.vict.label3.ForeColor = Color.WhiteSmoke;
-            Forms.vict.label4.ForeColor = Color.WhiteSmoke;
-            Forms.vict.label5.ForeColor = Color.WhiteSmoke;
-            Forms.vict.Show();
-        }
-
-        private void светлаяToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Forms.vict.BackColor = Color.White;
-            Forms.vict.comboBox1.BackColor = Color.White;
-            Forms.vict.button1.BackColor = Color.White;
-            Forms.vict.button2.BackColor = Color.White;
-            Forms.vict.button3.BackColor = Color.White;
-            Forms.vict.checkBox1.ForeColor = Color.White;
-            Forms.vict.checkBox2.ForeColor = Color.White;
-            Forms.vict.checkBox3.ForeColor = Color.White;
-            Forms.vict.checkBox4.ForeColor = Color.White;
-            Forms.vict.label1.ForeColor = Color.White;
-            Forms.vict.label2.ForeColor = Color.White;
-            Forms.vict.label3.ForeColor = Color.White;
-            Forms.vict.label4.ForeColor = Color.White;
-            Forms.vict.label5.ForeColor = Color.White;
-            Forms.vict.Show();
-        }
-
         public void выйтиИзАккаунтаToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Windows.Forms.Form f = System.Windows.Forms.Application.OpenForms["JoinForm"];  //Для открытия текущей формы
@@ -91,6 +53,15 @@ namespace Victoryna
         {
             Create_questions create_Questions = new Create_questions();
             create_Questions.Show();
+        }
+
+        private void Vict_Load(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Form VictF = System.Windows.Forms.Application.OpenForms["Vict"];
+            if(User_data.join_login == "maximka")
+            {
+                ((Vict)VictF).menuStrip1.Items[1].Enabled = true;
+            }
         }
     }
 }

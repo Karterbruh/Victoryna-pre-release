@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing;
 using System.ComponentModel;
+using System.IO;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Victoryna
@@ -420,8 +421,20 @@ namespace Victoryna
         public static void Next_questions()
         {
             System.Windows.Forms.Form VictF = System.Windows.Forms.Application.OpenForms["Vict"];
-            //GOTO: кароче как-то надо сделать, что вот последний вопрос уже прошел, надо подвести результаты 
-            if ((((User_data.counter == 22) && ((Vict)VictF).comboBox1.SelectedIndex == 3)) || ((User_data.question == 22) && (((Vict)VictF).comboBox1.SelectedIndex != 3)))      //Рандом или конкретный тест
+            int amount_questions = 0;   //Максимальное количество вопросов
+            if (((Vict)VictF).comboBox1.SelectedIndex == 0)
+            {
+                amount_questions = text_data.Geography_questions.Length;
+            }
+            else if (((Vict)VictF).comboBox1.SelectedIndex == 1)
+            {
+                amount_questions = text_data.History_questions.Length;
+            }
+            else if (((Vict)VictF).comboBox1.SelectedIndex == 2)
+            {
+                amount_questions = text_data.Biology_questions.Length;
+            }
+            if ((((User_data.counter == amount_questions) && ((Vict)VictF).comboBox1.SelectedIndex == 3)) || ((User_data.question == amount_questions) && (((Vict)VictF).comboBox1.SelectedIndex != 3)))      //Рандом или конкретный тест
             {
                 ((Vict)VictF).Size = new System.Drawing.Size(850, 380);
                 ((Vict)VictF).comboBox1.Visible = true;
@@ -431,7 +444,7 @@ namespace Victoryna
                 ((Vict)VictF).label5.Visible = true;
                 ((Vict)VictF).dataGridView1.Visible = true;
                 ((Vict)VictF).menuStrip1.Items[0].Enabled = true;
-                if (((User_data.counter == 21) && (((Vict)VictF).comboBox1.SelectedIndex == 3)))
+                if (((User_data.counter == amount_questions) && (((Vict)VictF).comboBox1.SelectedIndex == 3)))
                 {
                     User_data.all_points -= User_data.points_Random;
                     User_data.points_Random = User_data.points;
@@ -508,27 +521,60 @@ namespace Victoryna
             }
         }
 
-        public static void Add_questions_with_excel()
-        {
-            string path = "C:\\Users\\User\\Desktop\\Victoryna Beta 2\\ques red.xlsx";
-            var exApp = new Excel.Application();
-            var exBook = exApp.Workbooks.Open(path);
-            if (exBook == null) throw new ArgumentNullException("exBook");
-            var ExSheet = (Excel.Worksheet)exBook.Sheets[1];
-            var lastcell = ExSheet.Cells.SpecialCells(Type: Excel.XlCellType.xlCellTypeLastCell);
-            List<text_data.question> lst_geography_questions = text_data.Geography_questions.OfType<text_data.question>().ToList();
-            for (int i = 1; i < lastcell.Column; i++) //Все колонки
-            {
-                for (int j = 2; j < lastcell.Row;)  //Строки
-                {
-                    lst_geography_questions.Add(new text_data.question { queststring = ExSheet.Cells[j,i].ToString(), answers = new string[4] { ExSheet.Cells[j + 1, i].ToString(), ExSheet.Cells[j + 2, i].ToString(), ExSheet.Cells[j + 3, i].ToString(), ExSheet.Cells[j + 4, i].ToString() }, right_answer = Convert.ToInt32(ExSheet.Cells[j + 5, i])}); //TODO: не понимаю в чём ошибка, на что ругается
-                }
+        //public static void Add_questions_with_excel()   //Функция с экселем не работает, т.к. не тот офис скачан, мне кажется нужна "профессиональная" версия
+        //{
+        //    string path = "C:\\Users\\User\\Desktop\\Victoryna Beta 2\\ques red.xlsx";
+        //    var exApp = new Excel.Application();
+        //    var exBook = exApp.Workbooks.Open(path);
+        //    if (exBook == null) throw new ArgumentNullException("exBook");
+        //    var ExSheet = (Excel.Worksheet)exBook.Sheets[1];
+        //    var lastcell = ExSheet.Cells.SpecialCells(Type: Excel.XlCellType.xlCellTypeLastCell);
+        //    List<text_data.question> lst_geography_questions = text_data.Geography_questions.OfType<text_data.question>().ToList();
+        //    for (int i = 1; i < lastcell.Column; i++) //Все колонки
+        //    {
+        //        for (int j = 2; j < lastcell.Row;)  //Строки
+        //        {
+        //            lst_geography_questions.Add(new text_data.question { queststring = ExSheet.Cells[j,i].ToString(), answers = new string[4] { ExSheet.Cells[j + 1, i].ToString(), ExSheet.Cells[j + 2, i].ToString(), ExSheet.Cells[j + 3, i].ToString(), ExSheet.Cells[j + 4, i].ToString() }, right_answer = Convert.ToInt32(ExSheet.Cells[j + 5, i])}); //TODO: не понимаю в чём ошибка, на что ругается
+        //        }
 
+        //    }
+        //    text_data.Geography_questions = lst_geography_questions.ToArray();
+        //    exBook.Close(false, Type.Missing, Type.Missing);
+        //    exApp.Quit();
+        //    GC.Collect();
+        //}
+
+        public static void Input_questions()  
+        {
+            System.Windows.Forms.Form CreateQues = System.Windows.Forms.Application.OpenForms["Create_questions"];
+            StreamReader streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Victoryna Beta 2\\История.txt", Encoding.Default);
+            if (((Create_questions)CreateQues).comboBox1.SelectedIndex == 0)
+            {
+                streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Victoryna Beta 2\\География.txt", Encoding.Default);
             }
-            text_data.Geography_questions = lst_geography_questions.ToArray();
-            exBook.Close(false, Type.Missing, Type.Missing);
-            exApp.Quit();
-            GC.Collect();
+            if (((Create_questions)CreateQues).comboBox1.SelectedIndex == 1)
+            {
+                streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Victoryna Beta 2\\История.txt", Encoding.Default);
+            }
+            if (((Create_questions)CreateQues).comboBox1.SelectedIndex == 2)
+            {
+                streamReader = new StreamReader("C:\\Users\\User\\Desktop\\Victoryna Beta 2\\Биология.txt", Encoding.Default);
+            }
+
+            List<text_data.question> lst_history_questions = text_data.History_questions.OfType<text_data.question>().ToList();
+            ((Create_questions)CreateQues).textBox1.Text = "";
+            int i = 1;  //Просто счетчик ну чтоб красиво было мол первый вопрос, второй и тд... :)
+            while (!streamReader.EndOfStream) //Цикл длится пока не будет достигнут конец файла
+            {
+                string s_line = streamReader.ReadLine();
+                string[] words = s_line.Split(new char[] { ':' });
+                lst_history_questions.Add(new text_data.question { queststring = words[0], answers = new string[4] { words[1], words[2], words[3], words[4] }, right_answer = Convert.ToInt32(words[5]) });
+                ((Create_questions)CreateQues).textBox1.Text += i + ". " + words[0] + Environment.NewLine;
+                i++;
+            }
+            text_data.History_questions = lst_history_questions.ToArray();
+            ((Create_questions)CreateQues).label1.Text = "Загруженные вопросы";
+            MessageBox.Show("Вопросы были добавлены!");
         }
     }
 }

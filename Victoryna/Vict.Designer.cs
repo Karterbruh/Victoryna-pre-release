@@ -202,6 +202,7 @@
             // 
             // добавитьВопросToolStripMenuItem
             // 
+            this.добавитьВопросToolStripMenuItem.Enabled = false;
             this.добавитьВопросToolStripMenuItem.Name = "добавитьВопросToolStripMenuItem";
             this.добавитьВопросToolStripMenuItem.Size = new System.Drawing.Size(114, 20);
             this.добавитьВопросToolStripMenuItem.Text = "Добавить вопрос";
@@ -262,6 +263,7 @@
             this.Name = "Vict";
             this.Text = "Vict";
             this.Activated += new System.EventHandler(this.Vict_Activated);
+            this.Load += new System.EventHandler(this.Vict_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

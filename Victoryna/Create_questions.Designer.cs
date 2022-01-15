@@ -29,7 +29,6 @@ namespace Victoryna
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Create_questions));
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox2 = new System.Windows.Forms.TextBox();
@@ -50,20 +49,21 @@ namespace Victoryna
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(56, 68);
+            this.textBox1.Location = new System.Drawing.Point(58, 87);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(209, 104);
             this.textBox1.TabIndex = 0;
+            this.textBox1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.textBox1_MouseClick);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(143, 52);
+            this.label1.Location = new System.Drawing.Point(104, 70);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(44, 13);
+            this.label1.Size = new System.Drawing.Size(123, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Вопрос";
+            this.label1.Text = "Загруженные вопросы";
             // 
             // textBox2
             // 
@@ -184,12 +184,11 @@ namespace Victoryna
             // 
             // button2
             // 
-            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
-            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.button2.Location = new System.Drawing.Point(12, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(33, 28);
+            this.button2.Size = new System.Drawing.Size(36, 37);
             this.button2.TabIndex = 15;
+            this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -223,7 +222,6 @@ namespace Victoryna
         }
 
         #endregion
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -239,5 +237,6 @@ namespace Victoryna
         public System.Windows.Forms.TextBox textBox4;
         public System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.Button button2;
+        public System.Windows.Forms.Label label1;
     }
 }

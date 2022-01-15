@@ -15,8 +15,6 @@ namespace Victoryna
         public Create_questions()
         {
             InitializeComponent();
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -24,15 +22,23 @@ namespace Victoryna
             Vict_func.Add_questions();
         }
 
-        private void Create_questions_Load(object sender, EventArgs e)
-        {
-            ToolTip t = new ToolTip();
-            t.SetToolTip(button2, "Загрузить вопросы с Excel");
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
-            Vict_func.Add_questions_with_excel();
+            Vict_func.Input_questions();
+        }
+
+        private void Create_questions_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show("Для загрузки вопроса из файла нужно выбрать тему вопроса и нажать на кнопку в верхнем левом углу\nДля ручной загрузки необходимо заполнить все поля и тему вопросов");
+        }
+
+        private void textBox1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (label1.Text == "Загруженные вопросы")
+            {
+                label1.Text = "Вопросы";
+                textBox1.Text = "";
+            }
         }
     }
 }
